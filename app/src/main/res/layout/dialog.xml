@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.airbnb.lottie.LottieAnimationView
+            android:layout_height="100dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_fileName="userlogin.json"
+            android:layout_marginTop="0dp" android:layout_marginBottom="16dp" android:id="@+id/icon_lottie"
+            android:layout_width="match_parent"/>
+
+    <EditText
+            android:id="@+id/edtUser"
+            android:inputType="textPersonName"
+            android:hint="username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/icon_lottie" android:layout_marginTop="0dp"/>
+
+    <EditText
+            android:id="@+id/edtPass"
+            android:inputType="textPassword"
+            android:layout_below="@+id/edtUser"
+            android:hint="password"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <Button
+            android:id="@+id/btnLogin"
+            android:layout_below="@+id/edtPass"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="login"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+</RelativeLayout>

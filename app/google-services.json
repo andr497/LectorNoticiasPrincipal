@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "463231583610",
+    "firebase_url": "https://lectornoticias-d92ac.firebaseio.com",
+    "project_id": "lectornoticias-d92ac",
+    "storage_bucket": "lectornoticias-d92ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463231583610:android:0a6e6f58fe570061",
+        "android_client_info": {
+          "package_name": "com.example.lectornoticiasprincipal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463231583610-qlq6g0n2taqc547683h905j34c8djt89.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lectornoticiasprincipal",
+            "certificate_hash": "ed65c69dd51e5c03b1bbe4778c879dabe9f63608"
+          }
+        },
+        {
+          "client_id": "463231583610-3vrnhai34bgkrki52pi62l8ae4fjlpsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHX4sQ4qHjCmCu1mLoIv5Tas-8F00pkL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463231583610-3vrnhai34bgkrki52pi62l8ae4fjlpsb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

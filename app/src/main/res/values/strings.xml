@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LectorNoticiasPrincipal</string>
+    <string name="msj_exito">Sesión inciado con éxito</string>
+    <string name="msj_error">Llena todos los campos</string>
+</resources>

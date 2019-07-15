@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvnombre" android:textStyle="bold"
+            android:layout_marginTop="4dp" android:layout_marginLeft="0dp"
+            android:layout_marginStart="56dp" android:layout_margin="5dp"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvapellido"
+            android:layout_marginTop="4dp" android:layout_marginLeft="29dp" android:layout_marginStart="59dp"
+            android:textStyle="bold" android:layout_margin="5dp"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_edit" android:id="@+id/btn_edit"
+            android:layout_weight="1" android:layout_margin="5dp" android:layout_marginLeft="4dp"
+            android:layout_marginTop="29dp" android:contentDescription="TODO"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_delete" android:id="@+id/btn_delete"
+            android:layout_weight="1" android:layout_margin="5dp" android:layout_marginLeft="4dp"
+            android:layout_marginTop="29dp"/>
+</LinearLayout>
