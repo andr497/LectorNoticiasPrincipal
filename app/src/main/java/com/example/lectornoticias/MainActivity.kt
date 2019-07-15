@@ -50,7 +50,9 @@ class MainActivity : AppCompatActivity() {
 
             dialog.setView(view)
             dialog.setCancelable(true)
+
             auth=FirebaseAuth.getInstance()
+
             val dialogShow = dialog.create()
             dialogShow.show()
 
