@@ -44,7 +44,7 @@ class CrearCuenta : AppCompatActivity() {
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
 
-        dbReference = database.reference.child("User")
+        dbReference = database.reference.child("usuarios")
 
         bt_crear.setOnClickListener {
             nueva_cuenta()
@@ -98,10 +98,7 @@ class CrearCuenta : AppCompatActivity() {
         val correo: String = ed_correo.text.toString()
         val pass: String = ed_password.text.toString()
 
-        if (!TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) && !TextUtils.isEmpty(correo) && !TextUtils.isEmpty(
-                pass
-            )
-        ) {
+        if (!TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) && !TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)) {
             progressBar.visibility = View.VISIBLE
             auth.createUserWithEmailAndPassword(correo, pass)
                 .addOnCompleteListener(this) { task ->
