@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.room.Database
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -31,17 +34,17 @@ class CrearCuenta : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_cuenta)
 
-        usu.nombre=ed_nombre.text.toString()
-        usu.apellido=ed_apellido.text.toString()
-        usu.correo=ed_correo.text.toString()
-        usu.pass=ed_password.text.toString()
+        usu.nombre = ed_nombre.text.toString()
+        usu.apellido = ed_apellido.text.toString()
+        usu.correo = ed_correo.text.toString()
+        usu.pass = ed_password.text.toString()
 
-        progressBar=findViewById(R.id.Barra)
+        progressBar = findViewById(R.id.Barra)
 
-        database= FirebaseDatabase.getInstance()
-        auth= FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        auth = FirebaseAuth.getInstance()
 
-        dbReference=database.reference.child("User")
+        dbReference = database.reference.child("User")
 
         bt_crear.setOnClickListener {
             nueva_cuenta()
@@ -88,50 +91,86 @@ class CrearCuenta : AppCompatActivity() {
         }
         */
     }
-    private fun nueva_cuenta(){
-        val nombre:String = ed_nombre.text.toString()
-        val apellido:String = ed_apellido.text.toString()
-        val correo:String = ed_correo.text.toString()
-        val pass:String = ed_password.text.toString()
 
-        if(!TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) && !TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass))
-        {
-            progressBar.visibility=View.VISIBLE
-            auth.createUserWithEmailAndPassword(correo,pass)
-                .addOnCompleteListener(this) {
-                    task ->
+    private fun nueva_cuenta() {
+        val nombre: String = ed_nombre.text.toString()
+        val apellido: String = ed_apellido.text.toString()
+        val correo: String = ed_correo.text.toString()
+        val pass: String = ed_password.text.toString()
 
-                    if (task.isComplete){
-                        val user:FirebaseUser?=auth.currentUser
+        if (!TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) && !TextUtils.isEmpty(correo) && !TextUtils.isEmpty(
+                pass
+            )
+        ) {
+            progressBar.visibility = View.VISIBLE
+            auth.createUserWithEmailAndPassword(correo, pass)
+                .addOnCompleteListener(this) { task ->
+
+                    if (task.isComplete) {
+                        val user: FirebaseUser? = auth.currentUser
 
                         verificar_correo(user)
 
-                        val userBD=dbReference.child(user?.uid.toString())
+                        val userBD = dbReference.child(user?.uid.toString())
                         userBD.child("nombre").setValue(nombre)
                         userBD.child("apellido").setValue(apellido)
-                        
-                        Toast.makeText(this,"Cuenta creada",Toast.LENGTH_SHORT).show()
+
+                        Toast.makeText(this, "Cuenta creada", Toast.LENGTH_SHORT).show()
                         //startActivity(Intent(this,MainActivity::class.java))
+                        action()
+                    }
+                }
+        } else {
+            Toast.makeText(this, "Rellene los campos", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun action() {
+        val dialog = AlertDialog.Builder(this@CrearCuenta)
+        val view = layoutInflater.inflate(R.layout.dialog, null)
+
+        val etuser = view.findViewById<EditText>(R.id.edtUser)
+        val etpass = view.findViewById<EditText>(R.id.edtPass)
+        val btlog = view.findViewById<Button>(R.id.btnLogin)
+
+        dialog.setView(view)
+        dialog.setCancelable(true)
+
+        auth = FirebaseAuth.getInstance()
+
+        val dialogShow = dialog.create()
+        dialogShow.show()
+
+        btlog.setOnClickListener {
+            val user: String = etuser.text.toString()
+            val pass: String = etpass.text.toString()
+
+            if (!TextUtils.isEmpty(user) && !TextUtils.isEmpty(pass)) {
+
+                auth.signInWithEmailAndPassword(user, pass)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Usted se ha logeado", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "Usuario o clave incorrecta", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+            } else {
+                Toast.makeText(this, getText(R.string.msj_error), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+        private fun verificar_correo(user: FirebaseUser?) {
+            user?.sendEmailVerification()
+                ?.addOnCompleteListener(this) { task ->
+
+                    if (task.isComplete) {
+                        Toast.makeText(this, "Email enviado", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Error al enviar email", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
-        else{
-            Toast.makeText(this,"Rellene los campos",Toast.LENGTH_SHORT).show()
-        }
-    }
-    private fun verificar_correo(user: FirebaseUser?)
-    {
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener(this){
-                task ->
-
-                if (task.isComplete)
-                {
-                    Toast.makeText(this,"Email enviado",Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    Toast.makeText(this,"Error al enviar email",Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
 }
