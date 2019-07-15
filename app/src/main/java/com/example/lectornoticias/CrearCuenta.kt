@@ -107,9 +107,9 @@ class CrearCuenta : AppCompatActivity() {
                         verificar_correo(user)
 
                         val userBD=dbReference.child(user?.uid.toString())
-
                         userBD.child("nombre").setValue(nombre)
                         userBD.child("apellido").setValue(apellido)
+                        
                         Toast.makeText(this,"Cuenta creada",Toast.LENGTH_SHORT).show()
                         //startActivity(Intent(this,MainActivity::class.java))
                     }

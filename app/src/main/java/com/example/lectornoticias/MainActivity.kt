@@ -3,12 +3,14 @@ package com.example.lectornoticias
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.appcompat.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_inicial,menu)
         return true
     }
-
+        private lateinit var auth: FirebaseAuth
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id=item?.itemId
 
@@ -48,15 +50,27 @@ class MainActivity : AppCompatActivity() {
 
             dialog.setView(view)
             dialog.setCancelable(true)
-
+            auth=FirebaseAuth.getInstance()
             val dialogShow = dialog.create()
             dialogShow.show()
 
             btlog.setOnClickListener {
-                if (!etuser.text.isEmpty() && !etpass.text.isEmpty()){
-                    setTitle("Hola " + etuser.text)
-                    Toast.makeText(this, getText(R.string.msj_exito), Toast.LENGTH_SHORT).show()
-                    dialogShow.dismiss()
+                val user:String=etuser.text.toString()
+                val pass:String=etpass.text.toString()
+
+                if (!TextUtils.isEmpty(user) && !TextUtils.isEmpty(pass)){
+
+                    auth.signInWithEmailAndPassword(user,pass)
+                        .addOnCompleteListener(this){
+                            task ->
+                            if(task.isSuccessful)
+                            {
+                                Toast.makeText(this,"Usted se ha logeado",Toast.LENGTH_SHORT).show()
+                            }
+                            else{
+                                Toast.makeText(this,"Usuario o clave incorrecta",Toast.LENGTH_SHORT).show()
+                            }
+                        }
 
                 }else{
                     Toast.makeText(this, getText(R.string.msj_error), Toast.LENGTH_SHORT).show()
