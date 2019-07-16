@@ -5,13 +5,22 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.lectornoticias.ForgotPass">
+        tools:context="com.example.lectornoticias.ForgotPass" android:orientation="vertical">
+
+    <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:id="@+id/pb_forgotPass"/>
 
     <com.airbnb.lottie.LottieAnimationView
             android:layout_height="100dp"
             app:lottie_autoPlay="true"
-            app:lottie_loop="false"
+            app:lottie_loop="true"
             app:lottie_fileName="verify_email.json"
+            android:layout_below="@id/pb_forgotPass"
             android:layout_marginTop="0dp" android:layout_marginBottom="16dp" android:id="@+id/icon_lottie"
             android:layout_width="match_parent"/>
 
@@ -28,7 +37,7 @@
             android:id="@+id/btn_send_pass"
             android:layout_below="@+id/edtPass"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:text="login"
+            android:text="Restablecer contraseña"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

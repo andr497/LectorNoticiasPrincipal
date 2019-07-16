@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.room.Database
 import com.google.android.gms.tasks.OnFailureListener
@@ -134,6 +131,7 @@ class CrearCuenta : AppCompatActivity() {
         val etcorreo = view.findViewById<EditText>(R.id.edtCorreo)
         val etpass = view.findViewById<EditText>(R.id.edtPass)
         val btlog = view.findViewById<Button>(R.id.btnLogin)
+        val txtrestar=view.findViewById<TextView>(R.id.txt_restaurar)
 
         dialog.setView(view)
         dialog.setCancelable(true)
@@ -162,7 +160,7 @@ class CrearCuenta : AppCompatActivity() {
                 Toast.makeText(this, "Rellene los campos", Toast.LENGTH_SHORT).show()
             }
         }
-        txt_restaurar.setOnClickListener {
+        txtrestar.setOnClickListener {
             startActivity(Intent(this,ForgotPass::class.java))
         }
     }

@@ -7,9 +7,8 @@ import android.text.TextUtils
 import androidx.appcompat.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.android.synthetic.main.activity_main.*
@@ -47,6 +46,8 @@ class MainActivity : AppCompatActivity() {
             val etcorreo = view.findViewById<EditText>(R.id.edtCorreo)
             val etpass = view.findViewById<EditText>(R.id.edtPass)
             val btlog = view.findViewById<Button>(R.id.btnLogin)
+            val txtrestar=view.findViewById<TextView>(R.id.txt_restaurar)
+            val pb_login=view.findViewById<ProgressBar>(R.id.circulo)
 
             dialog.setView(view)
             dialog.setCancelable(true)
@@ -57,26 +58,28 @@ class MainActivity : AppCompatActivity() {
             dialogShow.show()
 
             btlog.setOnClickListener {
-                val correo:String=etcorreo.text.toString()
-                val pass:String=etpass.text.toString()
+                val correo: String = etcorreo.text.toString()
+                val pass: String = etpass.text.toString()
 
-                if (!TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)){
+                if (!TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)) {
 
-                    auth.signInWithEmailAndPassword(correo,pass)
-                        .addOnCompleteListener(this){
-                            task ->
-                            if(task.isSuccessful)
-                            {
-                                Toast.makeText(this,"Usted se ha logeado",Toast.LENGTH_SHORT).show()
-                            }
-                            else{
-                                Toast.makeText(this,"Usuario o clave incorrecta",Toast.LENGTH_SHORT).show()
+                    auth.signInWithEmailAndPassword(correo, pass)
+                        .addOnCompleteListener(this) { task ->
+                            pb_login.visibility= View.VISIBLE
+                            if (task.isSuccessful) {
+                                pb_login.visibility= View.GONE
+                                Toast.makeText(this, "Usted se ha logeado", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(this, "Usuario o clave incorrecta", Toast.LENGTH_SHORT).show()
                             }
                         }
 
-                }else{
-                    Toast.makeText(this, getText(R.string.msj_error), Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Rellene los campos", Toast.LENGTH_SHORT).show()
                 }
+            }
+            txtrestar.setOnClickListener {
+                startActivity(Intent(this,ForgotPass::class.java))
             }
             return true
         }
