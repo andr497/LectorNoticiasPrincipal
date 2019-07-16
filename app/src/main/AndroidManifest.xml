@@ -9,17 +9,19 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="com.example.lectornoticias.VerUsuarios">
+        <activity android:name=".MenuSesionIniciada">
         </activity>
-        <activity android:name="com.example.lectornoticias.ElaborarNoticia">
+        <activity android:name=".VerUsuarios">
         </activity>
-        <activity android:name="com.example.lectornoticias.VerComentarios">
+        <activity android:name=".ElaborarNoticia">
         </activity>
-        <activity android:name="com.example.lectornoticias.VerNoticias">
+        <activity android:name=".VerComentarios">
         </activity>
-        <activity android:name="com.example.lectornoticias.CrearCuenta">
+        <activity android:name=".VerNoticias">
         </activity>
-        <activity android:name="com.example.lectornoticias.MainActivity">
+        <activity android:name=".CrearCuenta">
+        </activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
