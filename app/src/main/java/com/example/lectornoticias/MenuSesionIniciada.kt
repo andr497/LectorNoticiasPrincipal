@@ -16,6 +16,7 @@ class MenuSesionIniciada : AppCompatActivity() {
         setContentView(R.layout.activity_menu_sesion_iniciada)
         setSupportActionBar(tb_sesion)
         setTitle("Bienvenido")
+        auth= FirebaseAuth.getInstance()
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_sesion,menu)
