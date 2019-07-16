@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             val etpass = view.findViewById<EditText>(R.id.edtPass)
             val btlog = view.findViewById<Button>(R.id.btnLogin)
             val txtrestar=view.findViewById<TextView>(R.id.txt_restaurar)
-            val pb_login=view.findViewById<ProgressBar>(R.id.circulo)
+            val pb_login=view.findViewById<ProgressBar>(R.id.pb_barra)
 
             dialog.setView(view)
             dialog.setCancelable(true)
@@ -65,9 +65,8 @@ class MainActivity : AppCompatActivity() {
 
                     auth.signInWithEmailAndPassword(correo, pass)
                         .addOnCompleteListener(this) { task ->
-                            pb_login.visibility= View.VISIBLE
                             if (task.isSuccessful) {
-                                pb_login.visibility= View.GONE
+                                pb_login.visibility= View.VISIBLE
                                 Toast.makeText(this, "Usted se ha logeado", Toast.LENGTH_SHORT).show()
                             } else {
                                 Toast.makeText(this, "Usuario o clave incorrecta", Toast.LENGTH_SHORT).show()
