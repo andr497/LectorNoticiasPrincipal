@@ -39,9 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     <TextView
-            android:text="Restaurar clave"
+            android:text="¿Olvidaste tú contraseña?"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/txt_restaurar" android:layout_below="@id/btnLogin"
-            android:gravity="center"/>
+            android:gravity="center" android:textStyle="bold|italic" android:textColor="@android:color/black"/>
 
 </RelativeLayout>
