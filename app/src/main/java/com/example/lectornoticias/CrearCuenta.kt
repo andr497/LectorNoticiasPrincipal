@@ -38,6 +38,7 @@ class CrearCuenta : AppCompatActivity() {
         usu.nombre = ed_nombre.text.toString()
         usu.apellido = ed_apellido.text.toString()
         usu.correo = ed_correo.text.toString()
+        usu.username = ed_user.text.toString()
         usu.pass = ed_password.text.toString()
 
         progressBar = findViewById(R.id.Barra)
@@ -97,7 +98,7 @@ class CrearCuenta : AppCompatActivity() {
         val nombre: String = ed_nombre.text.toString()
         val apellido: String = ed_apellido.text.toString()
         val correo: String = ed_correo.text.toString()
-        val username:String = ed_username.text.toString()
+        val username:String = ed_user.text.toString()
         val pass: String = ed_password.text.toString()
 
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) && !TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)) {
@@ -158,12 +159,12 @@ class CrearCuenta : AppCompatActivity() {
                     }
 
             } else {
-                Toast.makeText(this, getText(R.string.msj_error), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Rellene los campos", Toast.LENGTH_SHORT).show()
             }
         }
-        txt_restaurar.setOnClickListener {
+        //txt_restaurar.setOnClickListener {
             //startActivity(Intent(this,))
-        }
+        //}
     }
 
     private fun verificar_correo(user: FirebaseUser?) {

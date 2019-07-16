@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             val dialog = AlertDialog.Builder(this@MainActivity)
             val view = layoutInflater.inflate(R.layout.dialog, null)
 
-            val etuser = view.findViewById<EditText>(R.id.edtCorreo)
+            val etcorreo = view.findViewById<EditText>(R.id.edtCorreo)
             val etpass = view.findViewById<EditText>(R.id.edtPass)
             val btlog = view.findViewById<Button>(R.id.btnLogin)
 
@@ -57,12 +57,12 @@ class MainActivity : AppCompatActivity() {
             dialogShow.show()
 
             btlog.setOnClickListener {
-                val user:String=etuser.text.toString()
+                val correo:String=etcorreo.text.toString()
                 val pass:String=etpass.text.toString()
 
-                if (!TextUtils.isEmpty(user) && !TextUtils.isEmpty(pass)){
+                if (!TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)){
 
-                    auth.signInWithEmailAndPassword(user,pass)
+                    auth.signInWithEmailAndPassword(correo,pass)
                         .addOnCompleteListener(this){
                             task ->
                             if(task.isSuccessful)
