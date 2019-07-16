@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
                                 pb_login.visibility= View.VISIBLE
                                 Toast.makeText(this, "Usted se ha logeado", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this,MenuSesionIniciada::class.java))
                             } else {
                                 Toast.makeText(this, "Usuario o clave incorrecta", Toast.LENGTH_SHORT).show()
                             }

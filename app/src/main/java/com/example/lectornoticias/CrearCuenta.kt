@@ -150,6 +150,7 @@ class CrearCuenta : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(correo, pass)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+                            startActivity(Intent(this,MenuSesionIniciada::class.java))
                             Toast.makeText(this, "Usted se ha logeado", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(this, "Usuario o clave incorrecta", Toast.LENGTH_SHORT).show()
