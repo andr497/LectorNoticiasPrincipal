@@ -11,7 +11,7 @@
             android:layout_height="100dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="false"
-            app:lottie_fileName="userlogin.json"
+            app:lottie_fileName="verify_email.json"
             android:layout_marginTop="0dp" android:layout_marginBottom="16dp" android:id="@+id/icon_lottie"
             android:layout_width="match_parent"/>
 

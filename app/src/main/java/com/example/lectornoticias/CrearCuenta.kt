@@ -162,9 +162,9 @@ class CrearCuenta : AppCompatActivity() {
                 Toast.makeText(this, "Rellene los campos", Toast.LENGTH_SHORT).show()
             }
         }
-        //txt_restaurar.setOnClickListener {
-            //startActivity(Intent(this,))
-        //}
+        txt_restaurar.setOnClickListener {
+            startActivity(Intent(this,ForgotPass::class.java))
+        }
     }
 
     private fun verificar_correo(user: FirebaseUser?) {
