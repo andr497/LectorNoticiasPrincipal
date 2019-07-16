@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_crear_cuenta.*
+import kotlinx.android.synthetic.main.dialog.*
 import kotlin.collections.HashMap
 
 val usu=Usuarios()
@@ -96,9 +97,10 @@ class CrearCuenta : AppCompatActivity() {
         val nombre: String = ed_nombre.text.toString()
         val apellido: String = ed_apellido.text.toString()
         val correo: String = ed_correo.text.toString()
+        val username:String = ed_username.text.toString()
         val pass: String = ed_password.text.toString()
 
-        if (!TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) && !TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)) {
+        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) && !TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)) {
             progressBar.visibility = View.VISIBLE
             auth.createUserWithEmailAndPassword(correo, pass)
                 .addOnCompleteListener(this) { task ->
@@ -111,22 +113,24 @@ class CrearCuenta : AppCompatActivity() {
                         val userBD = dbReference.child(user?.uid.toString())
                         userBD.child("nombre").setValue(nombre)
                         userBD.child("apellido").setValue(apellido)
+                        userBD.child("username").setValue(username)
 
-                        Toast.makeText(this, "Cuenta creada", Toast.LENGTH_SHORT).show()
                         //startActivity(Intent(this,MainActivity::class.java))
-                        action()
+                        action_login()
+                        Toast.makeText(this, "Cuenta creada", Toast.LENGTH_SHORT).show()
                     }
                 }
-        } else {
+        }
+        else {
             Toast.makeText(this, "Rellene los campos", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun action() {
+    private fun action_login() {
         val dialog = AlertDialog.Builder(this@CrearCuenta)
         val view = layoutInflater.inflate(R.layout.dialog, null)
 
-        val etuser = view.findViewById<EditText>(R.id.edtUser)
+        val etcorreo = view.findViewById<EditText>(R.id.edtCorreo)
         val etpass = view.findViewById<EditText>(R.id.edtPass)
         val btlog = view.findViewById<Button>(R.id.btnLogin)
 
@@ -139,12 +143,12 @@ class CrearCuenta : AppCompatActivity() {
         dialogShow.show()
 
         btlog.setOnClickListener {
-            val user: String = etuser.text.toString()
+            val correo: String = etcorreo.text.toString()
             val pass: String = etpass.text.toString()
 
-            if (!TextUtils.isEmpty(user) && !TextUtils.isEmpty(pass)) {
+            if (!TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)) {
 
-                auth.signInWithEmailAndPassword(user, pass)
+                auth.signInWithEmailAndPassword(correo, pass)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Usted se ha logeado", Toast.LENGTH_SHORT).show()
@@ -157,17 +161,21 @@ class CrearCuenta : AppCompatActivity() {
                 Toast.makeText(this, getText(R.string.msj_error), Toast.LENGTH_SHORT).show()
             }
         }
+        txt_restaurar.setOnClickListener {
+            //startActivity(Intent(this,))
+        }
     }
 
-        private fun verificar_correo(user: FirebaseUser?) {
-            user?.sendEmailVerification()
-                ?.addOnCompleteListener(this) { task ->
-
-                    if (task.isComplete) {
-                        Toast.makeText(this, "Email enviado", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "Error al enviar email", Toast.LENGTH_SHORT).show()
-                    }
+    private fun verificar_correo(user: FirebaseUser?) {
+        user?.sendEmailVerification()
+            ?.addOnCompleteListener(this)
+            { task ->
+                if (task.isComplete) {
+                    Toast.makeText(this, "Email enviado", Toast.LENGTH_SHORT).show()
                 }
-        }
+                else {
+                    Toast.makeText(this, "Error al enviar email", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
 }

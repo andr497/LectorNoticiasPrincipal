@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             val dialog = AlertDialog.Builder(this@MainActivity)
             val view = layoutInflater.inflate(R.layout.dialog, null)
 
-            val etuser = view.findViewById<EditText>(R.id.edtUser)
+            val etuser = view.findViewById<EditText>(R.id.edtCorreo)
             val etpass = view.findViewById<EditText>(R.id.edtPass)
             val btlog = view.findViewById<Button>(R.id.btnLogin)
 

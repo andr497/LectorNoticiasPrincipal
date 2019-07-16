@@ -5,6 +5,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+    <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/circulo"
+            android:visibility="gone"
+            android:indeterminate="true"
+    />
     <com.airbnb.lottie.LottieAnimationView
             android:layout_height="100dp"
             app:lottie_autoPlay="true"
@@ -14,9 +22,9 @@
             android:layout_width="match_parent"/>
 
     <EditText
-            android:id="@+id/edtUser"
-            android:inputType="textPersonName"
-            android:hint="username"
+            android:id="@+id/edtCorreo"
+            android:inputType="textEmailAddress"
+            android:hint="email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/icon_lottie" android:layout_marginTop="0dp"/>
@@ -24,7 +32,7 @@
     <EditText
             android:id="@+id/edtPass"
             android:inputType="textPassword"
-            android:layout_below="@+id/edtUser"
+            android:layout_below="@+id/edtCorreo"
             android:hint="password"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
