@@ -1,5 +1,6 @@
 package com.example.lectornoticias
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,7 +13,7 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_menu_sesion_iniciada.*
 
 class MenuSesionIniciada : AppCompatActivity() {
-    class OnlineMatch() {}
+
     private lateinit var auth: FirebaseAuth
     private lateinit var dbReference: DatabaseReference
     private lateinit var database: FirebaseDatabase
@@ -22,6 +23,9 @@ class MenuSesionIniciada : AppCompatActivity() {
         setContentView(R.layout.activity_menu_sesion_iniciada)
         setSupportActionBar(tb_sesion)
         setTitle("Bienvenido")
+
+        val OI:Intent=intent
+        var correito = OI.getStringExtra("Correo")
 
         auth= FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
@@ -35,11 +39,19 @@ class MenuSesionIniciada : AppCompatActivity() {
             override fun onChildRemoved(p0: DataSnapshot) {}
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 val usuarioDS = p0.getValue(Usuarios::class.java)
-                if (usuarioDS != null) {
+                if (usuarioDS != null && correito==usuarioDS.correo) {
                     Toast.makeText(this@MenuSesionIniciada, "Hola " + usuarioDS.nombre, Toast.LENGTH_LONG).show()
+                    val autor = usuarioDS.nombre.toString() +" "+ usuarioDS.apellido
+                    intent.putExtra("autor",autor)
                 }
             }
         })
+
+        var autor = OI.getStringExtra("autor")
+        iv_agregar_noticia.setOnClickListener{
+            startActivity(Intent(this,AgregarNoticia::class.java).putExtra("autor1",autor))
+        }
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_sesion,menu)

@@ -99,6 +99,7 @@ class CrearCuenta : AppCompatActivity() {
                         userBD.child("nombre").setValue(nombre)
                         userBD.child("apellido").setValue(apellido)
                         userBD.child("username").setValue(username)
+                        userBD.child("correo").setValue(correo)
                         verificar_correo(user)
                         //startActivity(Intent(this,MainActivity::class.java))
                         action_login()
