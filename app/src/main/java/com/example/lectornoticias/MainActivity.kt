@@ -22,11 +22,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(tb_inicio)
         setTitle("Inicio")
-
-        button.setOnClickListener {
-            val a = Intent(this, VerUsuarios::class.java)
-            startActivity(a)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -15,6 +15,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.android.synthetic.main.activity_ver_noticias.*
@@ -88,8 +89,6 @@ class VerNoticias : AppCompatActivity() {
                             val descripcion=view.findViewById<TextView>(R.id.lb_descripcion)
                             val autor=view.findViewById<TextView>(R.id.lb_autor)
 
-
-
                             dialog.setView(view)
                             dialog.setCancelable(true)
 
@@ -101,9 +100,12 @@ class VerNoticias : AppCompatActivity() {
                             dialogShow.show()
                         }
 
-
                     }
                 })
+
+                holder.delete.setOnClickListener{
+                    dbReference.child(placeid).removeValue()
+                }
             }
 
         }
@@ -114,5 +116,6 @@ class VerNoticias : AppCompatActivity() {
             RecyclerView.ViewHolder(itemView!!){
         internal var autor:TextView = itemView!!.findViewById<TextView>(R.id.tv_autor_item)
         internal var titulo:TextView=itemView!!.findViewById<TextView>(R.id.tv_titulo_item)
+        internal var delete:ImageView=itemView!!.findViewById<ImageView>(R.id.iv_delete)
     }
 }
