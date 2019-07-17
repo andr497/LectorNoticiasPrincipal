@@ -15,6 +15,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.android.synthetic.main.activity_ver_noticias.*
 
@@ -78,6 +79,29 @@ class VerNoticias : AppCompatActivity() {
                     override fun onDataChange(p0: DataSnapshot) {
                         holder.autor.setText(p2.autor)
                         holder.titulo.setText(p2.titulo)
+
+                        holder.itemView.setOnClickListener {
+                            val dialog = AlertDialog.Builder(this@VerNoticias)
+                            val view = layoutInflater.inflate(R.layout.dialog_noticia, null)
+
+                            val titulo=view.findViewById<TextView>(R.id.lb_titulo)
+                            val descripcion=view.findViewById<TextView>(R.id.lb_descripcion)
+                            val autor=view.findViewById<TextView>(R.id.lb_autor)
+
+
+
+                            dialog.setView(view)
+                            dialog.setCancelable(true)
+
+                            titulo.text = p2.titulo
+                            descripcion.text = p2.descripcion
+                            autor.text = p2.autor
+
+                            val dialogShow = dialog.create()
+                            dialogShow.show()
+                        }
+
+
                     }
                 })
             }

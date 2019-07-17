@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <com.airbnb.lottie.LottieAnimationView
+            android:layout_height="100dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_fileName="news.json"
+            android:layout_marginTop="0dp" android:layout_marginBottom="16dp" android:id="@+id/icon_lottie"
+            android:layout_width="match_parent"/>
+
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/lb_titulo" android:gravity="center"
+            android:textSize="28dp" android:textStyle="bold" android:textColor="@android:color/black"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/lb_descripcion" android:gravity="center"
+            android:textSize="15dp" android:textStyle="italic" android:layout_margin="10dp"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/lb_autor"/>
+</LinearLayout>
