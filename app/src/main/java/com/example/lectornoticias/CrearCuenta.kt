@@ -7,17 +7,11 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.room.Database
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_crear_cuenta.*
-import kotlinx.android.synthetic.main.dialog.*
-import kotlin.collections.HashMap
 
 val usu=Usuarios()
 class CrearCuenta : AppCompatActivity() {
@@ -34,7 +28,7 @@ class CrearCuenta : AppCompatActivity() {
 
         usu.nombre = ed_nombre.text.toString()
         usu.apellido = ed_apellido.text.toString()
-        usu.correo = ed_correo.text.toString()
+        usu.correo = ed_correo_CC.text.toString()
         usu.username = ed_user.text.toString()
         usu.pass = ed_password.text.toString()
 
@@ -94,7 +88,7 @@ class CrearCuenta : AppCompatActivity() {
     private fun nueva_cuenta() {
         val nombre: String = ed_nombre.text.toString()
         val apellido: String = ed_apellido.text.toString()
-        val correo: String = ed_correo.text.toString()
+        val correo: String = ed_correo_CC.text.toString()
         val username:String = ed_user.text.toString()
         val pass: String = ed_password.text.toString()
 
@@ -106,13 +100,11 @@ class CrearCuenta : AppCompatActivity() {
                     if (task.isComplete) {
                         val user: FirebaseUser? = auth.currentUser
 
-                        verificar_correo(user)
-
                         val userBD = dbReference.child(user?.uid.toString())
                         userBD.child("nombre").setValue(nombre)
                         userBD.child("apellido").setValue(apellido)
                         userBD.child("username").setValue(username)
-
+                        verificar_correo(user)
                         //startActivity(Intent(this,MainActivity::class.java))
                         action_login()
                         Toast.makeText(this, "Cuenta creada", Toast.LENGTH_SHORT).show()

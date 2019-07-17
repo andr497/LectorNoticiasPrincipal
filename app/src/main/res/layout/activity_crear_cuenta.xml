@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/ed_correo"
+            android:id="@+id/ed_correo_CC"
             android:hint="Correo" style="@style/Base.AlertDialog.AppCompat.Light"
             android:textColorHint="@android:color/black"
             android:textSize="18sp" android:textStyle="bold|italic"
