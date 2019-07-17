@@ -18,6 +18,7 @@ class MenuSesionIniciada : AppCompatActivity() {
     private lateinit var dbReference: DatabaseReference
     private lateinit var database: FirebaseDatabase
 
+    //lateinit var autor:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_sesion_iniciada)
@@ -41,17 +42,27 @@ class MenuSesionIniciada : AppCompatActivity() {
                 val usuarioDS = p0.getValue(Usuarios::class.java)
                 if (usuarioDS != null && correito==usuarioDS.correo) {
                     Toast.makeText(this@MenuSesionIniciada, "Hola " + usuarioDS.nombre, Toast.LENGTH_LONG).show()
-                    val autor = usuarioDS.nombre.toString() +" "+ usuarioDS.apellido
-                    intent.putExtra("autor",autor)
+                    setAutor(usuarioDS.nombre.toString() +" "+ usuarioDS.apellido)
                 }
             }
         })
 
-        var autor = OI.getStringExtra("autor")
         iv_agregar_noticia.setOnClickListener{
-            startActivity(Intent(this,AgregarNoticia::class.java).putExtra("autor1",autor))
+            startActivity(Intent(this,AgregarNoticia::class.java).putExtra("autor",getAutor()))
+        }
+        iv_ver_noticia.setOnClickListener{
+            startActivity(Intent(this,VerNoticias::class.java))
         }
 
+    }
+    private lateinit var autor:String
+    fun getAutor():String
+    {
+        return autor
+    }
+    fun setAutor(autor:String)
+    {
+        this.autor = autor
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_sesion,menu)

@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         }
         if(id==R.id.item_ver_noticia)
         {
-            Toast.makeText(this, "Ver noticia no disponible", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this,VerNoticias::class.java))
         }
         return super.onOptionsItemSelected(item)
     }
