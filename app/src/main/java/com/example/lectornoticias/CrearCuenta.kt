@@ -91,8 +91,9 @@ class CrearCuenta : AppCompatActivity() {
         val correo: String = ed_correo_CC.text.toString()
         val username:String = ed_user.text.toString()
         val pass: String = ed_password.text.toString()
+        //if(pass.length<6){ error("Min. 6 caracteres")}
 
-        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) && !TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)) {
+        if (ed_password.text.toString().length >= 6 && !TextUtils.isEmpty(username) && !TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) && !TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)) {
             progressBar.visibility = View.VISIBLE
             auth.createUserWithEmailAndPassword(correo, pass)
                 .addOnCompleteListener(this) { task ->
@@ -112,50 +113,17 @@ class CrearCuenta : AppCompatActivity() {
                 }
         }
         else {
+            ed_nombre.error = if (ed_nombre.text.isEmpty()){"Campo Obligatorio"}else{null}
+            ed_apellido.error = if (ed_apellido.text.isEmpty()){"Campo Obligatorio"}else{null}
+            ed_correo_CC.error = if (ed_correo_CC.text.isEmpty()){"Campo Obligatorio"}else{null}
+            ed_user.error = if (ed_user.text.isEmpty()){"Campo Obligatorio"}else{null}
+            ed_password.error = if (ed_password.text.toString().length < 6) {"Min. 6 caracteres"} else {null}
             Toast.makeText(this, "Rellene los campos", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun action_login() {
-        val dialog = AlertDialog.Builder(this@CrearCuenta)
-        val view = layoutInflater.inflate(R.layout.dialog, null)
-
-        val etcorreo = view.findViewById<EditText>(R.id.edtCorreo)
-        val etpass = view.findViewById<EditText>(R.id.edtPass)
-        val btlog = view.findViewById<Button>(R.id.btnLogin)
-        val txtrestar=view.findViewById<TextView>(R.id.txt_restaurar)
-
-        dialog.setView(view)
-        dialog.setCancelable(true)
-
-        auth = FirebaseAuth.getInstance()
-
-        val dialogShow = dialog.create()
-        dialogShow.show()
-
-        btlog.setOnClickListener {
-            val correo: String = etcorreo.text.toString()
-            val pass: String = etpass.text.toString()
-
-            if (!TextUtils.isEmpty(correo) && !TextUtils.isEmpty(pass)) {
-
-                auth.signInWithEmailAndPassword(correo, pass)
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            startActivity(Intent(this,MenuSesionIniciada::class.java))
-                            Toast.makeText(this, "Usted se ha logeado", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(this, "Usuario o clave incorrecta", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-            } else {
-                Toast.makeText(this, "Rellene los campos", Toast.LENGTH_SHORT).show()
-            }
-        }
-        txtrestar.setOnClickListener {
-            startActivity(Intent(this,ForgotPass::class.java))
-        }
+        finish()
     }
 
     private fun verificar_correo(user: FirebaseUser?) {
