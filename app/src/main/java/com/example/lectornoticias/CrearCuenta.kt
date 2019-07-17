@@ -26,12 +26,6 @@ class CrearCuenta : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_cuenta)
 
-        usu.nombre = ed_nombre.text.toString()
-        usu.apellido = ed_apellido.text.toString()
-        usu.correo = ed_correo_CC.text.toString()
-        usu.username = ed_user.text.toString()
-        usu.pass = ed_password.text.toString()
-
         progressBar = findViewById(R.id.Barra)
 
         database = FirebaseDatabase.getInstance()
